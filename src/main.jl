@@ -148,7 +148,7 @@ function SolverCore.solve!(
     [Int64, T, T, T, String, T, T, T],
   )
   verbose > 0 && @info log_row(Any[iter, ft, norm_∇f, 0.0, "First iteration", α])
-  callback(nlp, solver, stats)
+  callback(nlp_at_x, solver, stats)
 
   while !OK && (stats.status != :user)
     preprocess!(nlp_stop, PData, workspace, ∇f, norm_∇f, α)
@@ -237,7 +237,7 @@ function SolverCore.solve!(
     if unsuccinarow >= max_unsuccinarow
       stats.status = :user
     end
-    callback(nlp, solver, stats)
+    callback(nlp_at_x, solver, stats)
   end # while !OK
 
   stats
